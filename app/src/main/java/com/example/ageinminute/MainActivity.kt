@@ -41,9 +41,9 @@ class MainActivity : AppCompatActivity() {
       val dpd =  DatePickerDialog(this,DatePickerDialog.OnDateSetListener{view,selectedYear,selectedMonth,selectedDayOfmonth
             ->
             Toast.makeText(this,"Selected date is $selectedDayOfmonth/${selectedMonth+1}/$selectedYear ",Toast.LENGTH_LONG).show()
-            val selectedDayOfmonth:Int = day
-            val selectedMonth:Int = month
-            val selectedYear:Int = year
+//            val selectedDayOfmonth:Int = day
+//            val selectedMonth:Int = month
+//            val selectedYear:Int = year
             val selectedDate= "$selectedDayOfmonth/${selectedMonth+1}/$selectedYear"
             val selectedDatebtn = findViewById<TextView>(R.id.tvSelectedDate)
             selectedDatebtn.setText(selectedDate)
@@ -54,10 +54,18 @@ class MainActivity : AppCompatActivity() {
             val currentDateinMinutes = currentDate!!.time/60000
             val differenceInMinutes = currentDateinMinutes-selectedDateInMinutes
             val outputScreen = findViewById<TextView>(R.id.age_in_min)
-            outputScreen.setText(differenceInMinutes.toString())
-        },year,month,day)
+            if(differenceInMinutes>0)
+            {outputScreen.setText(differenceInMinutes.toString())}
+                else{
+                    outputScreen.setText("INPUT VALID DATE")
+                    Toast.makeText(this,"ENTER A VALID DATE",Toast.LENGTH_LONG).show()
+            }
 
-       // dpd.datePicker.getMaxDate(Date().time-8640000)
+        }
+          ,year
+          ,month
+          ,day)
+        //dpd.datePicker.getMaxDate(Date().time)
         dpd.show()
 
 
